@@ -121,3 +121,86 @@ async function mostrarDatos() {
 mostrarDatos();
 ```
 ## `API`
+
+En JavaScript, una API (Application Programming Interface, por sus siglas en inglés) es un conjunto de reglas y protocolos que permite a diferentes aplicaciones y servicios comunicarse entre sí. Una API define cómo deben interactuar dos componentes de software, especificando los tipos de solicitudes y respuestas que se pueden enviar y recibir.
+
+En el contexto de JavaScript, existen diferentes tipos de API, incluyendo:
+
+API del navegador: Estas API están integradas en los navegadores web y permiten a JavaScript interactuar con diferentes elementos y funciones del navegador. Algunos ejemplos comunes son la API del DOM (Document Object Model), que permite manipular y modificar elementos HTML y CSS en una página web, y la API de Geolocalización, que permite obtener la ubicación del usuario.
+
+API de terceros: Muchos servicios y plataformas ofrecen APIs públicas que permiten a los desarrolladores acceder a sus datos y funcionalidades. Estas API permiten integrar características de terceros en aplicaciones web o desarrollar aplicaciones que se conecten a servicios externos. Algunos ejemplos populares son la API de Twitter, que permite acceder a los tweets y perfiles de los usuarios, y la API de Google Maps, que proporciona funciones de mapas y geolocalización.
+
+API RESTful: Las API RESTful (Representational State Transfer) son un estilo arquitectónico común para el diseño de APIs web. Estas API se basan en los métodos HTTP, como GET, POST, PUT y DELETE, para realizar operaciones en recursos y representaciones de datos. Los datos se transfieren generalmente en formato JSON. Las API RESTful son ampliamente utilizadas en el desarrollo web y son compatibles con la mayoría de los lenguajes de programación, incluyendo JavaScript.
+
+Para interactuar con una API en JavaScript, se utilizan las funciones y objetos proporcionados por el lenguaje. Por ejemplo, se pueden utilizar las funciones fetch o XMLHttpRequest para realizar solicitudes HTTP a una API y obtener los datos de respuesta. Luego, se pueden manipular y mostrar los datos obtenidos en la aplicación.
+
+ejemplo fetch:
+```
+fetch('https://api.github.com/users/username')
+  .then(response => response.json())
+  .then(data => {
+    console.log(data);
+    // Manipula y muestra los datos en la aplicación
+  })
+  .catch(error => {
+    console.log('Error:', error);
+  });
+
+```
+
+ejemplo xmlhttp request:
+```
+var xhr = new XMLHttpRequest();
+xhr.open('GET', 'https://api.example.com/data', true);
+
+xhr.onload = function() {
+  if (xhr.status === 200) {
+    var responseData = JSON.parse(xhr.responseText);
+    console.log(responseData);
+    // Manipula y muestra los datos en la aplicación
+  } else {
+    console.log('Error:', xhr.status);
+  }
+};
+
+xhr.onerror = function() {
+  console.log('Error de red');
+};
+
+xhr.send();
+```
+
+ejemplo ajax (jquery):
+
+```
+$.ajax({
+  url: 'https://api.example.com/data',
+  method: 'GET',
+  dataType: 'json',
+  success: function(response) {
+    console.log(response);
+    // Manipula y muestra los datos en la aplicación
+  },
+  error: function(xhr, status, error) {
+    console.log('Error:', error);
+  }
+});
+
+```
+Ejemplo axios:
+```
+// Make a request for a user with a given ID
+  axios.get('/user?ID=12345')
+  .then(function (response) {
+    // handle success
+    console.log(response);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  })
+  .finally(function () {
+    // always executed
+  });
+
+  ```

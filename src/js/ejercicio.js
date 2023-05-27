@@ -1,11 +1,45 @@
 class Pokemon {
-    constructor(nombre, tipo, locacion, img){
+    //constructor
+    constructor(id, nombre, tipo, locacion, img){
+        this.id = id
         this.nombre = nombre;
         this.tipo = tipo;
         this.locacion = locacion;
         this.img = img;
     }
+    //getters y setters
+    setId(id){
+        this.id = id;
+    }
+    getId(){
+        return this.id;
+    }
+    setNombre(nombre){
+        this.nombre = nombre;
+    }
+    getNombre(){
+        return this.nombre;
+    }
+    setTipo(tipo){
+        this.tipo = tipo;
+    }
+    getTipo(){
+        return this.tipo;
+    }
+    setLocacion(locacion){
+        this.locacion = locacion;
+    }
+    getLocacion(){
+        return this.locacion;
+    }
+    setImg(img){
+        this.img = img;
+    }
+    getImg(){
+        return this.img
+    }
 }
+const nuevo_pokemon = new Pokemon();
 const pokeapi = 'https://pokeapi.co/api/v2/';
 //el valor de entrada "nombre" y boton para buscar 
 const nombre_pokemon = document.getElementById('nombre_pokemon');
@@ -32,11 +66,14 @@ const obtenerPokemonConNombre = (nombre_pokemon) =>{
         console.log(response);
         return response.json();
     }).then(data=>{
-        console.log('data', data);
-        const nuevo_pokemon = new Pokemon(data.name,data.types[0].type.name,data.location_area_encounters, data.sprites.front_default);
+        console.log(data);
+        nuevo_pokemon.setId(data.id);
+        nuevo_pokemon.setNombre(data.name);
+        nuevo_pokemon.setLocacion(data.location_area_encounters);
+        nuevo_pokemon.setTipo(data.types[0].type.name);
+        nuevo_pokemon.setImg(data.sprites.front_default);
         console.log('nuevo pokemon', nuevo_pokemon);
         mostrarPokemon(nuevo_pokemon);
-
     }).catch(error=>{
         console.log('error: ',error);
     }); 
@@ -53,9 +90,10 @@ const mostrarPokemon = (pokemon)=>{
         `<h1>${pokemon.nombre}</h1>
         <div>${pokemon.tipo}</div>
         <div>${pokemon.locacion}</div>
-        <div><img src="${pokemon.img}" alt=""></div>`
+        <div><img src="${pokemon.img}" alt=""></div>
+        <div><button id="ver_evoluciones">Ver Evoluciones</button></div>`
     ;
     contenido_pokemon.innerHTML = contenido_innerhtml;
     vista_pokemon.appendChild(contenido_pokemon);
-
+    nuevoEvento();
 }
